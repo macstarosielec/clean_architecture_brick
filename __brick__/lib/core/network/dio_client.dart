@@ -1,14 +1,16 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:{{project_name.snakeCase()}}/core/config/app_config.dart';
 import 'package:{{project_name.snakeCase()}}/core/constants/api_constants.dart';
 
 @module
 abstract class NetworkModule {
   @lazySingleton
-  Dio get dio {
+  Dio dio(IAppConfig appConfig) {
     final dio = Dio(
       BaseOptions(
+        baseUrl: appConfig.baseUrl,
         connectTimeout: ApiConstants.connectTimeout,
         receiveTimeout: ApiConstants.receiveTimeout,
         headers: {
