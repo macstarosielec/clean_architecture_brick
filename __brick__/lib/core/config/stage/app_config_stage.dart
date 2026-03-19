@@ -2,6 +2,7 @@
 import 'package:{{project_name.snakeCase()}}/core/config/app_config.dart';
 import 'package:{{project_name.snakeCase()}}/core/config/app_constants.dart';
 import 'package:{{project_name.snakeCase()}}/core/config/stage/firebase_options_stage.dart';
+import 'package:{{project_name.snakeCase()}}/core/constants/api_constants.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:injectable/injectable.dart';
 
@@ -15,6 +16,9 @@ class AppConfigStage implements IAppConfig {
 
   @override
   String? get environment => 'stage';
+
+  @override
+  String get baseUrl => ApiConstants.baseUrlStage;
 
   @override
   bool get isLogBlocChanges => false;
