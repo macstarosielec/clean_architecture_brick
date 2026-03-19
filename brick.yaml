@@ -30,9 +30,3 @@ vars:
     description: Include staging environment
     default: true
     prompt: Include staging environment?
-
-  base_url_stage:
-    type: string
-    description: The base API URL for staging
-    default: https://stage-api.example.com
-    prompt: What is the staging API URL?
