@@ -1,8 +1,8 @@
 name: clean_architecture_layer
-description: Generate a layer-based Clean Architecture structure with Firebase, multiple environments, Very Good Analysis, Dio, Retrofit, GetIt/Injectable, BLoC, Freezed, and AutoRoute
-version: 1.0.0
+description: Generate a production-ready Flutter project with Clean Architecture, Firebase, BLoC, Injectable, Dio, Retrofit, Freezed, AutoRoute, FlutterGen, l10n, and comprehensive analytics/crashlytics service layer
+version: 2.0.0
 
-repository: https://github.com/yourusername/clean_architecture_brick
+repository: https://github.com/macstarosielec/clean_architecture_brick
 
 environment:
   mason: ">=0.1.0-dev <1.0.0"
@@ -12,25 +12,25 @@ vars:
     type: string
     description: The name of the project
     prompt: What is the project name?
-  
+
   base_url_dev:
     type: string
     description: The base API URL for development
     default: https://dev-api.example.com
     prompt: What is the development API URL?
-  
+
   base_url_prod:
     type: string
     description: The base API URL for production
     default: https://api.example.com
     prompt: What is the production API URL?
-  
+
   include_stage:
     type: boolean
     description: Include staging environment
     default: true
     prompt: Include staging environment?
-  
+
   base_url_stage:
     type: string
     description: The base API URL for staging

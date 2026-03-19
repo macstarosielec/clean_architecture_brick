@@ -1,0 +1,45 @@
+import 'package:{{project_name.snakeCase()}}/repositories/analytics_repository.dart';
+import 'package:{{project_name.snakeCase()}}/services/analytics/analytics_tracker.dart';
+import 'package:injectable/injectable.dart';
+
+@Injectable(as: AnalyticsRepository)
+class DefaultAnalyticsRepository implements AnalyticsRepository {
+  DefaultAnalyticsRepository({
+    required this.trackers,
+  });
+
+  final List<AnalyticsTracker> trackers;
+
+  @override
+  Future<void> trackScreen({
+    required String screenName,
+    String? screenClass,
+  }) async {
+    for (final tracker in trackers) {
+      await tracker.trackScreen(
+        screenName: screenName,
+        screenClass: screenClass,
+      );
+    }
+  }
+
+  @override
+  Future<void> trackEvent({
+    required String name,
+    Map<String, Object>? parameters,
+  }) async {
+    for (final tracker in trackers) {
+      await tracker.trackEvent(
+        name: name,
+        parameters: parameters,
+      );
+    }
+  }
+
+  @override
+  void setConsentMode({required bool enabled}) {
+    for (final tracker in trackers) {
+      tracker.setConsentMode(enabled: enabled);
+    }
+  }
+}

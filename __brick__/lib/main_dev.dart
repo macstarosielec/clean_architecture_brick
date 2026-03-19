@@ -1,6 +1,4 @@
-import 'bootstrap.dart';
-import 'core/config/environment_config.dart';
+import 'package:{{project_name.snakeCase()}}/bootstrap.dart';
+import 'package:injectable/injectable.dart';
 
-void main() {
-  bootstrap(Environment.dev);
-}
+Future<void> main() => bootstrap(environment: Environment.dev);
