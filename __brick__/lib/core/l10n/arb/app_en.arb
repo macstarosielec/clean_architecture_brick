@@ -1,0 +1,7 @@
+{
+  "@@locale": "en",
+  "appTitle": "{{project_name.titleCase()}}",
+  "@appTitle": {
+    "description": "Title text shown in the AppBar of the main page"
+  }
+}

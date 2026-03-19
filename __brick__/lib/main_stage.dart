@@ -1,8 +1,7 @@
 {{#include_stage}}
-import 'bootstrap.dart';
-import 'core/config/environment_config.dart';
+import 'package:{{project_name.snakeCase()}}/bootstrap.dart';
 
-void main() {
-  bootstrap(Environment.stage);
-}
+const _stage = 'stage';
+
+Future<void> main() => bootstrap(environment: _stage);
 {{/include_stage}}

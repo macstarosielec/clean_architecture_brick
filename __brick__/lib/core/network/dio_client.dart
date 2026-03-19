@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
-import '../constants/api_constants.dart';
+import 'package:{{project_name.snakeCase()}}/core/constants/api_constants.dart';
 
 @module
 abstract class NetworkModule {
@@ -9,37 +9,22 @@ abstract class NetworkModule {
   Dio get dio {
     final dio = Dio(
       BaseOptions(
-        baseUrl: ApiConstants.baseUrl,
         connectTimeout: ApiConstants.connectTimeout,
         receiveTimeout: ApiConstants.receiveTimeout,
-        headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
       ),
     );
-    dio.interceptors.addAll([
-      LogInterceptor(request: true, requestHeader: true, requestBody: true, responseHeader: true, responseBody: true, error: true),
-      _AnalyticsInterceptor(),
-    ]);
+    if (kDebugMode) {
+      dio.interceptors.add(
+        LogInterceptor(
+          requestBody: true,
+          responseBody: true,
+        ),
+      );
+    }
     return dio;
-  }
-}
-
-class _AnalyticsInterceptor extends Interceptor {
-  final FirebaseAnalytics _analytics = FirebaseAnalytics.instance;
-
-  @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    _analytics.logEvent(name: 'api_request', parameters: {'method': options.method, 'path': options.path});
-    super.onRequest(options, handler);
-  }
-
-  @override
-  void onError(DioException err, ErrorInterceptorHandler handler) {
-    _analytics.logEvent(name: 'api_error', parameters: {
-      'method': err.requestOptions.method,
-      'path': err.requestOptions.path,
-      'status_code': err.response?.statusCode ?? 0,
-      'error_type': err.type.toString(),
-    });
-    super.onError(err, handler);
   }
 }
